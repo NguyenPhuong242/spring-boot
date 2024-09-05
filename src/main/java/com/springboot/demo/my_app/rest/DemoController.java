@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class FunRestController {
+public class DemoController {
 
         //  inject properties for: coach.name and team.name
         @Value("${coach.name}")
