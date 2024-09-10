@@ -2,9 +2,9 @@ package com.springboot.demo.my_app.rest;
 
 import com.springboot.demo.my_app.entity.Worker;
 import jakarta.annotation.PostConstruct;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,14 @@ public class WorkerRestController {
     // return worker at index
     // http://localhost:1208/my-app/api/workers/1
     @GetMapping("/workers/{workerId}")
-    public Worker getWorker(int workerId) {
+    public Worker getWorker(@PathVariable int workerId) {
+
+        // check the workerId against list size
+        if (workerId >= workers.size() || workerId < 0) {
+            throw new WorkerNotFoundException("Worker id not found - " + workerId);
+        }
         return workers.get(workerId);
     }
+
+
 }
